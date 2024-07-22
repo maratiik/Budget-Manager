@@ -1,0 +1,77 @@
+1. ввод инкама
+2. ввод трат:
+    ежедневные по категориям или общие
+    ежемес по кат/общ
+3. ввод трат за прошлый месяц для того, чтобы определить необходимый план на сейв
+4. выбор своего плана на сейв (50n, 30w, 20s - рекомендуется):
+    100% - весь доход
+    needs% - продукты, жкх, утилки и тд
+    wants% - одежда, рестики, хобби
+    save%
+5. показ сумм, которые можно тратить на категории (n, w)
+6. создание целей (какая-то сумма и за сколько месяцев она примерно соберется)
+
+хранятся деньги в бд в центах/копейках (bigint)
+
+если вводит не тот id (проверка на то, принадлежит ли строка в таблице юзеру),
+то возвращать 4ХХ
+
+
+
+микросервисы:
+1. money-input-service
+    ввод денег (инкам, траты)
+    изменение этих данных
+2. plan-service
+    выбор плана на сейв
+    изменение плана
+    показ плана
+3. goals-service
+    создание целей
+    изменение целей
+4. security-service
+    привязка всего к user_id
+    регистрация
+    аутентификация
+
+бд:
+
+user {
+	id integer pk increments unique
+	username varchar
+	password varchar
+	name varchar
+}
+
+income {
+	id integer pk increments unique
+	user_id integer > user.id
+	value bigint
+	currency varchar
+}
+
+expense {
+	id integer pk increments unique
+	user_id integer > user.id
+	value bigint
+	type varchar
+	date timestamp
+}
+
+plan {
+	id integer pk increments unique
+	user_id integer > user.id
+	needs bigint
+	wants bigint
+	save bigint
+}
+
+goal {
+	id integer pk increments unique
+	user_id integer > user.id
+	name varchar
+	price bigint
+	date date
+}
+
+
