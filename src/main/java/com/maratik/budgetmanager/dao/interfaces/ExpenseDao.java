@@ -10,4 +10,5 @@ public interface ExpenseDao {
     void deleteById(long id);
     Expense findById(long id);
     List<Expense> findAllByUserUsername(String username);
+    List<Expense> findAllByUserUsernameAndMonthAndYear(String username, int month, int year);
 }

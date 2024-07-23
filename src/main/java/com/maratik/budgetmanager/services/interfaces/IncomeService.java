@@ -2,9 +2,13 @@ package com.maratik.budgetmanager.services.interfaces;
 
 import com.maratik.budgetmanager.entities.Income;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface IncomeService {
     void save(Income income);
     void update(Income income);
     void deleteById(long id);
-    Income findByUserUsername(String username);
+    Optional<Income> findById(long id);
+    List<Income> findAllByUserUsername(String username);
 }

@@ -42,4 +42,14 @@ public class ExpenseDaoImp implements ExpenseDao {
                 .setParameter("username", username)
                 .getResultList();
     }
+
+    @Override
+    public List<Expense> findAllByUserUsernameAndMonthAndYear(String username, int month, int year) {
+        return entityManager.createQuery(
+                "from Expense where user.username = :username and year(date) = :year and month(date) = :month",
+                        Expense.class)
+                .setParameter("year", year)
+                .setParameter("month", month)
+                .getResultList();
+    }
 }

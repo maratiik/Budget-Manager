@@ -9,5 +9,5 @@ public interface PlanDao {
     void update(Plan plan);
     void deleteById(long id);
     Plan findById(long id);
-    List<Plan> findAllByUserUsername(String username);
+    Plan findByUserUsername(String username);
 }

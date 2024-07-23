@@ -6,6 +6,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class IncomeDaoImp implements IncomeDao {
 
@@ -30,9 +32,14 @@ public class IncomeDaoImp implements IncomeDao {
     }
 
     @Override
-    public Income findByUserUsername(String username) {
+    public Income findById(long id) {
+        return entityManager.find(Income.class, id);
+    }
+
+    @Override
+    public List<Income> findAllByUserUsername(String username) {
         return entityManager.createQuery("from Income where user.username = :username", Income.class)
                 .setParameter("username", username)
-                .getSingleResult();
+                .getResultList();
     }
 }

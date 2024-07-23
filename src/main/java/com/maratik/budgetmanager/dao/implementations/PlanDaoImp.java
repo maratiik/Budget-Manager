@@ -37,9 +37,9 @@ public class PlanDaoImp implements PlanDao {
     }
 
     @Override
-    public List<Plan> findAllByUserUsername(String username) {
+    public Plan findByUserUsername(String username) {
         return entityManager.createQuery("from Plan where user.username = :username", Plan.class)
                 .setParameter("username", username)
-                .getResultList();
+                .getSingleResult();
     }
 }
