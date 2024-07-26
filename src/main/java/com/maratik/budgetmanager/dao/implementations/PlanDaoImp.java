@@ -42,4 +42,16 @@ public class PlanDaoImp implements PlanDao {
                 .setParameter("username", username)
                 .getSingleResult();
     }
+
+    @Override
+    public int existsByIdAndUserUsername(long id, String username) {
+        Plan plan = findById(id);
+
+        if (plan == null) return -1;
+
+        if (plan.getUser().getUsername().equals(username)) {
+            return 1;
+        }
+        return 0;
+    }
 }

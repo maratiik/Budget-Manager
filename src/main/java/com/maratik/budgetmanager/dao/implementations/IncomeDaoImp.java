@@ -42,4 +42,17 @@ public class IncomeDaoImp implements IncomeDao {
                 .setParameter("username", username)
                 .getResultList();
     }
+
+    @Override
+    public int existsByIdAndUserUsername(long id, String username) {
+        Income income = findById(id);
+
+        if (income == null) return -1;
+
+        if (income.getUser().getUsername().equals(username)) {
+            return 1;
+        }
+
+        return 0;
+    }
 }

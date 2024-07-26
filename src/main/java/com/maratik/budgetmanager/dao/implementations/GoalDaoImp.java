@@ -42,4 +42,17 @@ public class GoalDaoImp implements GoalDao {
                 .setParameter("username", username)
                 .getResultList();
     }
+
+    @Override
+    public int existsByIdAndUserUsername(long id, String username) {
+        Goal goal = findById(id);
+
+        if (goal == null) return -1;
+
+        if (goal.getUser().getUsername().equals(username)) {
+            return 1;
+        }
+
+        return 0;
+    }
 }

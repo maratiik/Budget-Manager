@@ -52,4 +52,17 @@ public class ExpenseDaoImp implements ExpenseDao {
                 .setParameter("month", month)
                 .getResultList();
     }
+
+    @Override
+    public int existsByIdAndUserUsername(long id, String username) {
+        Expense expense = findById(id);
+
+        if (expense == null) return -1;
+
+        if (expense.getUser().getUsername().equals(username)) {
+            return 1;
+        }
+
+        return 0;
+    }
 }
