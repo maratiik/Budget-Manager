@@ -25,16 +25,6 @@ public class GoalController {
 
     @GetMapping("{id}")
     public ResponseEntity<Goal> getGoal(@PathVariable Long id, Principal principal) {
-        Optional<Goal> goal = goalService.findById(id);
-        if (goal.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        } else {
-            if (goal.get().getUser().getUsername().equals(principal.getName())) {
-                return ResponseEntity.ok(goal.get());
-            } else {
-                return ResponseEntity.badRequest().build();
-            }
-        }
     }
 
     @GetMapping
@@ -71,17 +61,6 @@ public class GoalController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteGoal(@PathVariable Long id, Principal principal) {
-        Optional<Goal> goal = goalService.findById(id);
-        if (goal.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        } else {
-            if (goal.get().getUser().getUsername().equals(principal.getName())) {
-                goalService.deleteById(id);
-                return ResponseEntity.ok().build();
-            } else {
-                return ResponseEntity.badRequest().build();
-            }
-        }
     }
 
 }

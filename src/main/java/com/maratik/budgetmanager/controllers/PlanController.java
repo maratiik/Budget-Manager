@@ -26,7 +26,7 @@ public class PlanController {
     @GetMapping
     public ResponseEntity<Plan> getPlan(Principal principal) {
         Optional<Plan> plan = planService.findByUserUsername(principal.getName());
-        return plan.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return plan.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.noContent().build());
     }
 
     @PostMapping
@@ -55,7 +55,16 @@ public class PlanController {
         return ResponseEntity.ok().build();
     }
 
-    // TODO: implement other endpoints
-    // TODO: rethink services' validation (existsByIdAndUserUsername() method)
-    // TODO: so controllers don't validate this
+    @DeleteMapping
+    public ResponseEntity<Void> deletePlan(Principal principal) {
+        Optional<Plan> plan = planService.findByUserUsername(principal.getName());
+        if (plan.isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        } else {
+            planService.deleteById(plan.get().getId());
+            return ResponseEntity.ok().build();
+        }
+    }
+
+
 }

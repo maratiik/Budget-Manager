@@ -28,16 +28,6 @@ public class ExpenseController {
 
     @GetMapping("{id}")
     public ResponseEntity<Expense> getExpense(@PathVariable Long id, Principal principal) {
-        Optional<Expense> expense = expenseService.findById(id);
-        if (expense.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        } else {
-            if (expense.get().getUser().getUsername().equals(principal.getName())) {
-                return ResponseEntity.ok(expense.get());
-            } else {
-                return ResponseEntity.badRequest().build();
-            }
-        }
     }
 
     @GetMapping
@@ -74,17 +64,6 @@ public class ExpenseController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteExpense(@PathVariable Long id, Principal principal) {
-        Optional<Expense> expense = expenseService.findById(id);
-        if (expense.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        } else {
-            if (expense.get().getUser().getUsername().equals(principal.getName())) {
-                expenseService.deleteById(id);
-                return ResponseEntity.ok().build();
-            } else {
-                return ResponseEntity.badRequest().build();
-            }
-        }
     }
 
     @GetMapping(Urls.EXPENSE_SUMMARY)

@@ -7,9 +7,9 @@ import java.util.Map;
 import java.util.Optional;
 
 public interface ExpenseService {
-    static String NEEDS = "needs";
-    static String WANTS = "wants";
-    static String SAVE = "save";
+    String NEEDS = "needs";
+    String WANTS = "wants";
+    String SAVE = "save";
 
     void save(Expense expense);
     void update(Expense expense);

@@ -25,16 +25,6 @@ public class IncomeController {
 
     @GetMapping("{id}")
     public ResponseEntity<Income> getIncome(@PathVariable Long id, Principal principal) {
-        Optional<Income> income = incomeService.findById(id);
-        if (income.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        } else {
-            if (income.get().getUser().getUsername().equals(principal.getName())) {
-                return ResponseEntity.ok(income.get());
-            } else {
-                return ResponseEntity.badRequest().build();
-            }
-        }
     }
 
     @GetMapping
@@ -71,16 +61,5 @@ public class IncomeController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteIncome(@PathVariable Long id, Principal principal) {
-        Optional<Income> income = incomeService.findById(id);
-        if (income.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        } else {
-            if (income.get().getUser().getUsername().equals(principal.getName())) {
-                incomeService.deleteById(id);
-                return ResponseEntity.ok().build();
-            } else {
-                return ResponseEntity.badRequest().build();
-            }
-        }
     }
 }
