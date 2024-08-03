@@ -37,4 +37,10 @@ public class UserServiceImp implements UserService {
     public Optional<User> findById(long id) {
         return Optional.ofNullable(userDao.findById(id));
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<User> findByUsername(String username) {
+        return Optional.ofNullable(userDao.findByUsername(username));
+    }
 }
