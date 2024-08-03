@@ -44,4 +44,9 @@ public class GoalServiceImp implements GoalService {
     public List<Goal> findAllByUserUsername(String username) {
         return goalDao.findAllByUserUsername(username);
     }
+
+    @Override
+    public int existsByIdAndUserUsername(long id, String username) {
+        return goalDao.existsByIdAndUserUsername(id, username);
+    }
 }

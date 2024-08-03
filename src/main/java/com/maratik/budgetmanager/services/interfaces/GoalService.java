@@ -12,4 +12,5 @@ public interface GoalService {
     void deleteById(long id);
     Optional<Goal> findById(long id);
     List<Goal> findAllByUserUsername(String username);
+    int existsByIdAndUserUsername(long id, String username);
 }

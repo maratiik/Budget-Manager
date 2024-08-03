@@ -11,4 +11,5 @@ public interface IncomeService {
     void deleteById(long id);
     Optional<Income> findById(long id);
     List<Income> findAllByUserUsername(String username);
+    int existsByIdAndUserUsername(long id, String username);
 }

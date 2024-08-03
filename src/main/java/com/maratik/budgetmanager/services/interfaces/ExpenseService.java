@@ -16,7 +16,8 @@ public interface ExpenseService {
     void deleteById(long id);
     Optional<Expense> findById(long id);
     List<Expense> findAllByUserUsername(String username);
-
+    List<Expense> findAllByUserUsernameAndMonthAndYear(String username, int month, int year);
+    int existsByIdAndUserUsername(long id, String username);
     /**
      * Finds expense sums by types (needs, wants, save) in respected order.
      * Month is user as parameter. If month == 0, it counts as the last month.
@@ -25,4 +26,5 @@ public interface ExpenseService {
      * @return Map of expense sums of three types: NEEDS, WANTS, SAVE
      */
     Map<String, Long> findExpenseSumsByUserUsernameAndMonthAndYear(String username, int month, int year);
+
 }

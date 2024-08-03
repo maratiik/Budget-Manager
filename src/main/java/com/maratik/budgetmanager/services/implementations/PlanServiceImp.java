@@ -44,4 +44,9 @@ public class PlanServiceImp implements PlanService {
     public Optional<Plan> findByUserUsername(String username) {
         return Optional.ofNullable(planDao.findByUserUsername(username));
     }
+
+    @Override
+    public int existsByIdAndUserUsername(long id, String username) {
+        return planDao.existsByIdAndUserUsername(id, username);
+    }
 }

@@ -11,4 +11,5 @@ public interface PlanService {
     void deleteById(long id);
     Optional<Plan> findById(long id);
     Optional<Plan> findByUserUsername(String username);
+    int existsByIdAndUserUsername(long id, String username);
 }

@@ -45,6 +45,16 @@ public class ExpenseServiceImp implements ExpenseService {
     }
 
     @Override
+    public List<Expense> findAllByUserUsernameAndMonthAndYear(String username, int month, int year) {
+        return expenseDao.findAllByUserUsernameAndMonthAndYear(username, month, year);
+    }
+
+    @Override
+    public int existsByIdAndUserUsername(long id, String username) {
+        return expenseDao.existsByIdAndUserUsername(id, username);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public Map<String, Long> findExpenseSumsByUserUsernameAndMonthAndYear(String username, int month, int year) {
         Map<String, Long> sums = new HashMap<>();

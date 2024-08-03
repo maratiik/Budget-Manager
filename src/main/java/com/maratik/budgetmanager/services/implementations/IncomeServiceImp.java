@@ -44,4 +44,9 @@ public class IncomeServiceImp implements IncomeService {
     public List<Income> findAllByUserUsername(String username) {
         return incomeDao.findAllByUserUsername(username);
     }
+
+    @Override
+    public int existsByIdAndUserUsername(long id, String username) {
+        return incomeDao.existsByIdAndUserUsername(id, username);
+    }
 }
