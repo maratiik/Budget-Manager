@@ -25,6 +25,19 @@ public class IncomeController {
 
     @GetMapping("{id}")
     public ResponseEntity<Income> getIncome(@PathVariable Long id, Principal principal) {
+        Income income = null;
+        switch (incomeService.existsByIdAndUserUsername(id, principal.getName())) {
+            case -1 -> {
+                return ResponseEntity.noContent().build();
+            }
+            case 0 -> {
+                return ResponseEntity.badRequest().build();
+            }
+            case 1 -> {
+                income = incomeService.findById(id).get();
+            }
+        }
+        return ResponseEntity.ok(income);
     }
 
     @GetMapping
@@ -61,5 +74,14 @@ public class IncomeController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteIncome(@PathVariable Long id, Principal principal) {
+        switch (incomeService.existsByIdAndUserUsername(id, principal.getName())) {
+            case -1, 0 -> {
+                return ResponseEntity.badRequest().build();
+            }
+            case 1 -> {
+                incomeService.deleteById(id);
+            }
+        }
+        return ResponseEntity.noContent().build();
     }
 }
